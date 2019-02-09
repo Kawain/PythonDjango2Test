@@ -1,0 +1,54 @@
+{% extends "app1/base.html" %}
+{% block title %}{{title}} - {{ block.super }}{% endblock %}
+{% block body %}
+
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                {{title}}
+            </h1>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin:50px auto;">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{% url 'app1:home' %}">ホーム</a></li>
+            <li class="is-active"><a aria-current="page">新規入力</a></li>
+        </ul>
+    </nav>
+
+    <form method="post">
+        {% csrf_token %}
+        <!--formの組み立て-->
+        <div class="field">
+            {{ form.category.label_tag }}
+            <div class="control">
+                <div class="select">
+                    {{ form.category }}
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.title.label_tag }}
+            <div class="control">
+                {{ form.title }}
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.detail.label_tag }}
+            <div class="control">
+                {{ form.detail }}
+            </div>
+        </div>
+
+        <div class="has-text-right">
+            <button type="submit" class="button is-link">保存</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

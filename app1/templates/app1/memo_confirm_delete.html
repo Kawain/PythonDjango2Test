@@ -1,0 +1,31 @@
+{% extends "app1/base.html" %}
+{% block title %}削除確認 - {{ block.super }}{% endblock %}
+{% block body %}
+
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                削除確認
+            </h1>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin:50px auto;">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{% url 'app1:home' %}">ホーム</a></li>
+            <li class="is-active"><a aria-current="page">削除確認</a></li>
+        </ul>
+    </nav>
+
+    <p style="margin:20px 0;">{{ object }} を削除していいですか?</p>
+
+    <form method="post">
+        <button class="button is-danger">削除する</button>
+        {% csrf_token %}
+        <a href="{% url 'app1:detail' object.id %}" class="button is-link">削除しない</a>
+    </form>
+</div>
+{% endblock body %}

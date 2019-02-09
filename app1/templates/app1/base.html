@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+{% load staticfiles %}
+
+<head lang="ja">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>{% block title %}メモ{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static '/app1/img/memo.png' %}">
+    <link rel="stylesheet" href="{% static '/app1/css/bulma.css' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="{% static '/app1/js/script.js' %}"></script>
+    <style>
+        .navbar-dropdown {
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        #id_detail {
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'app1:home' %}">メモ (Django版)</a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'app1:home' %}">ホーム</a>
+                <a class="navbar-item" href="{% url 'app1:create' %}">新規入力</a>
+
+                {% if category_items %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">カテゴリ</a>
+                    <div class="navbar-dropdown">
+                        {% for obj in category_items %}
+                        <a class="navbar-item" href="/?c={{obj.id}}">{{obj.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="/category">カテゴリ編集</a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="/admin">管理画面</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top:80px;">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

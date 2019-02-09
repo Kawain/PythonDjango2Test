@@ -1,0 +1,41 @@
+{% extends "app1/base.html" %}
+{% block title %}カテゴリ一覧 - {{ block.super }}{% endblock %}
+{% block body %}
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                カテゴリ一覧
+            </h1>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin:50px auto;">
+    <div class="is-pulled-right">
+        <a href="{% url 'app2:category_create' %}" class="button is-link">カテゴリ新規作成</a>
+    </div>
+
+    <table class="table is-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>カテゴリ名</th>
+                <th>編集</th>
+                <th>削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+            <tr>
+                <td>{{obj.id}}</td>
+                <td>{{obj.name}}</td>
+                <td><a href="{% url 'app2:category_update' obj.id %}" class="button is-link">編集</a></td>
+                <td><a href="{% url 'app2:category_delete' obj.id %}" class="button is-danger">削除</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

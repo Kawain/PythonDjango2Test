@@ -1,0 +1,76 @@
+{% extends "app1/base.html" %}
+{% block title %}{{title}} - {{ block.super }}{% endblock %}
+{% block body %}
+
+
+{% if home %}
+<section class="hero is-medium is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                メモ (Django版)
+            </h1>
+            <p class="" style="margin-top:20px;">
+                勉強用メモ。<br>
+                これは Python の Web フレームワーク Django の習作です。<br>
+                こちらのバージョンは、クラス・ベース・汎用ビュー や ModelForm やデータベースを切り分ける…などの勉強。<br>
+                CSS は初めて Bulma を使用しました。
+            </p>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                {{title}}
+            </h1>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="container" style="margin:50px auto;">
+
+    <div class="is-pulled-right">
+        <form action="/" method="GET">
+            <input type="hidden" name="c" value="{{c}}">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="search" placeholder="キーワード" name="q" value="{{q}}" required>
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-link">検索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table class="table is-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>カテゴリ</th>
+                <th>タイトル</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+            <tr>
+                <td>{{obj.id}}</td>
+                <td><a href="/?c={{obj.category.id}}">{{obj.category.name}}</a></td>
+                <td><a href="{% url 'app1:detail' obj.id %}">{{obj.title}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "app1/pagination.html" %}
+
+    <div class="has-text-centered">
+        <button class="button is-link" onclick="window.scrollTo(0,0);">上に戻る</button>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "app1/base.html" %}
+{% block title %}{{object.title}} - {{ block.super }}{% endblock %}
+{% block body %}
+
+<section class="hero is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                {{object.title}}
+            </h1>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin:50px auto;">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{% url 'app1:home' %}">ホーム</a></li>
+            <li><a href="/?c={{object.category.id}}">{{object.category.name}}</a></li>
+            <li class="is-active"><a aria-current="page">{{object.title}}</a></li>
+        </ul>
+    </nav>
+
+    <pre class="box" style="background-color: #e9ecef;"><code style="color: #000;font-family: 'Consolas';">{{object.detail}}</code></pre>
+    <div class="has-text-right" style="margin:20px 0 100px 0;">
+        <a href="{% url 'app1:delete' object.id %}" class="button is-danger">削除</a>
+        <a href="{% url 'app1:update' object.id %}" class="button is-link">編集</a>
+    </div>
+    <div class="has-text-centered">
+        <button class="button is-link" onclick="window.scrollTo(0,0);">上に戻る</button>
+    </div>
+</div>
+{% endblock body %}
