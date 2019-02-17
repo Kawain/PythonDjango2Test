@@ -68,6 +68,37 @@
 
     {% include "app1/pagination.html" %}
 
+    <form method="post" action="{% url 'app1:create' %}">
+        {% csrf_token %}
+        <!--formの組み立て-->
+        <div class="field">
+            {{ form.category.label_tag }}
+            <div class="control">
+                <div class="select">
+                    {{ form.category }}
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.title.label_tag }}
+            <div class="control">
+                {{ form.title }}
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.detail.label_tag }}
+            <div class="control">
+                {{ form.detail }}
+            </div>
+        </div>
+
+        <div class="has-text-right">
+            <button type="submit" class="button is-link">保存</button>
+        </div>
+    </form>
+
     <div class="has-text-centered">
         <button class="button is-link" onclick="window.scrollTo(0,0);">上に戻る</button>
     </div>

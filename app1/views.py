@@ -45,6 +45,7 @@ class MemoListView(ListView):
         # 親メソッドを呼び
         context = super().get_context_data(**kwargs)
         # ここから追加
+        context["form"] = MemoModelForm
         context["home"] = False
         context["c"] = self.c
         context["q"] = self.q
