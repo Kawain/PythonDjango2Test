@@ -8,5 +8,6 @@
 * Class-based 汎用 views で書くようにした（django.views.generic）
 * forms.ModelForm を使用した
 * CSS は Bootstrap から bulma に変更した
+* 必要ないが実験のためにListViewのget_context_dataにModelFormを追加してみた
 
 
